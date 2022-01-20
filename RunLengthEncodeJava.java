@@ -9,30 +9,30 @@ public class RunLengthEncodeJava {
 
     public static String encode(String input){
         if (input.length()==0) return "\"\"";
-        StringBuilder result=new StringBuilder();
+        String result="";
         char currentchar=input.charAt(0);
         int currentcharcount=1;
         for (int i=1;i<input.length();i++){
             if (input.charAt(i)==currentchar){
                 currentcharcount++;continue;
             }
-            if (currentcharcount>4)result.append("/"+((char)currentcharcount/10)+((char)currentcharcount%10)+currentchar);
+            if (currentcharcount>4)result+="/"+((char)currentcharcount/10)+((char)currentcharcount%10)+currentchar;
             else{
-                for (int j=0;j<currentcharcount;j++) result.append(currentchar);
+                for (int j=0;j<currentcharcount;j++) result+=currentchar;
             }
             currentchar=input.charAt(i);
             currentcharcount=1;
         }
-        if (currentcharcount>4)result.append("/"+((char)currentcharcount/10)+((char)currentcharcount%10)+currentchar);
+        if (currentcharcount>4)result+="/"+((char)currentcharcount/10)+((char)currentcharcount%10)+currentchar;
         else{
-            for (int j=0;j<currentcharcount;j++) result.append(currentchar);
+            for (int j=0;j<currentcharcount;j++) result+=currentchar;
         }
-        return result.toString();
+        return result;
     }
     
     public static String encode2(String input){
         if (input.length()==0) return "\"\"";
-        StringBuilder result=new StringBuilder();
+        String result="";
         char currentchar=input.charAt(0);
         int currentcharcount=1;
         String tempstr=""+currentchar;
@@ -40,19 +40,15 @@ public class RunLengthEncodeJava {
             if (input.charAt(i)==currentchar){
                 tempstr+=currentchar;currentcharcount++;continue;
             }
-            if (currentcharcount>4)result.append("/"+((char)currentcharcount/10)+((char)currentcharcount%10)+currentchar);
-            else{
-                result.append(tempstr);
-            }
+            if (currentcharcount>4)result+="/"+((char)currentcharcount/10)+((char)currentcharcount%10)+currentchar;
+            else result+=tempstr;
             currentchar=input.charAt(i);
             currentcharcount=1;
             tempstr=""+currentchar;
         }
-        if (currentcharcount>4)result.append("/"+((char)currentcharcount/10)+((char)currentcharcount%10)+currentchar);
-        else{
-            result.append(tempstr);
-        }
-        return result.toString();
+        if (currentcharcount>4)result+="/"+((char)currentcharcount/10)+((char)currentcharcount%10)+currentchar;
+        else result+=tempstr;
+        return result;
     }
     
     public static void main(String[] args) {
